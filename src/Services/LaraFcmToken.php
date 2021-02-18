@@ -49,7 +49,7 @@ class LaraFcmToken
      *
      * @return self
      */
-    public function setPlatform(string $platform) : self
+    public function setPlatform(?string $platform) : self
     {
         $this->platform = $platform;
         return $this;
@@ -77,7 +77,7 @@ class LaraFcmToken
      *
      * @return self
      */
-    public function setLocale(string $locale) : self
+    public function setLocale(?string $locale) : self
     {
         $this->locale = $locale;
         return $this;

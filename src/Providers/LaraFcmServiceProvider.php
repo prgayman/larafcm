@@ -4,7 +4,9 @@ namespace Prgayman\LaraFcm\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Prgayman\LaraFcm\Services\LaraFcm;
-use Prgayman\LaraFcm\Services\LaraFcmToken;
+
+use Illuminate\Notifications\ChannelManager;
+use Prgayman\LaraFcm\Channels\LaraFcmChannel;
 
 class LaraFcmServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,12 @@ class LaraFcmServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $app = $this->app;
+
+        $this->app->make(ChannelManager::class)->extend('larafcm', function () use ($app) {
+            return $app->make(LaraFcmChannel::class);
+        });
+
         $this->mergeConfigFrom(
             __DIR__. '/../../config/larafcm.php',
             'larafcm'
