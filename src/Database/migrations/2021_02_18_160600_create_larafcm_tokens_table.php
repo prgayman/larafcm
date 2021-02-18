@@ -17,12 +17,12 @@ class CreateLarafcmTokensTable extends Migration
             $table->id();
             $table->string("token");
             $table->string("platform")->nullable();
-            $table->string("entity_type")->nullable();
-            $table->unsignedBigInteger("entity_id")->nullable();
+            $table->string("model_type")->nullable();
+            $table->unsignedBigInteger("model_id")->nullable();
             $table->string("locale")->nullable();
             
             $table->timestamps();
-            $table->index(["entity_type", "entity_id"]);
+            $table->index(["model_type", "model_id"]);
         });
     }
 

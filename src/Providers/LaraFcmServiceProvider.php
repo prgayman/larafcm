@@ -4,6 +4,7 @@ namespace Prgayman\LaraFcm\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Prgayman\LaraFcm\Services\LaraFcm;
+use Prgayman\LaraFcm\Services\LaraFcmToken;
 
 class LaraFcmServiceProvider extends ServiceProvider
 {
