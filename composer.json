@@ -1,0 +1,43 @@
+{
+  "name": "prgayman/larafcm",
+  "description": "Laravel Firebase Cloud Messaging",
+  "version": "1.0.0",
+  "keywords": [
+    "prgayman",
+    "laravel",
+    "fcm",
+    "firebase",
+    "larafcm"
+  ],
+  "homepage": "https://github.com/prgayman/larafcm",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ayman Alaiwah",
+      "email": "aymanalaiwah.dev@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.2.5|^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Prgayman\\LaraFcm\\": "src"
+    },
+    "files": []
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Prgayman\\LaraFcm\\Providers\\LaraFcmServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
