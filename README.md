@@ -20,7 +20,7 @@ Or you can add it directly in your composer.json file:
 }
 ```
 
-Publish the package config file using the following command:
+Publish the package config and migrations files using the following command:
 
     $ php artisan vendor:publish --provider="Prgayman\LaraFcm\Providers\LaraFcmServiceProviderr"
 
@@ -36,7 +36,7 @@ Laravel >= 5.5 provides package auto-discovery, thanks to rasmuscnielsen and lui
 
 ```php
 'providers' => [
-	Prgayman\LaraFcm\Providers\LaraFcmServiceProvider::class,
+    Prgayman\LaraFcm\Providers\LaraFcmServiceProvider::class,
 ]
 ```
 
@@ -79,7 +79,7 @@ To get these keys, you must create a new application on the [firebase cloud mess
 
 After the creation of your application on Firebase, you can find keys in `project settings -> cloud messaging`.
 
-## Basic Usage
+## Usage
 
 Two types of messages can be sent using LaraFcm:
 
@@ -90,65 +90,84 @@ More information is available in the [official documentation](https://firebase.g
 
 ### Larafcm tokens manager (Prgayman\LaraFcm\Services\LaraFcmToken)
 
-The following use statements are required for the examples below:
-
 ```php
 use Prgayman\LaraFcm\Services\LaraFcmToken;
 
+// Store desvice token
+(new LaraFcmToken)
+->setTokens(['token'])
+->store();
+
+// Store desvice token to specific user
+(new LaraFcmToken)
+->setTokens('token')
+->setModel(User::find(1))
+->store();
+
+// Can you set platform or locale to token both options is optional
+(new LaraFcmToken)
+->setTokens(['token'])
+->setPlatform('android')
+->setLocale('en')
+->store();
+
+/**
+ * Get token from database you can use filter by model or locale ot platform to get tokens
+ *
+ * @param Illuminate\Database\Eloquent\Model|null $model
+ * @param string|null $locale
+ * @param string|null $platform
+ *
+ * @return array
+ */
+$tokens = LaraFcmToken::getDbTokens();
+
+$removeTokens = [];
+/**
+ * Remove toknes from database
+ * @param array $tokens
+ *
+ * @return bool
+*/
+$isDeleted = LaraFcmToken::removeDbTokens($removeTokens);
 ```
 
-```php
-    /**
-     * Store desvice token
-    */
-   (new LaraFcmToken)
-    ->setTokens(['token'])
-    ->store();
-```
+### Larafcm trait HasLaraFcm (Prgayman\LaraFcm\Traits\HasLaraFcm)
 
 ```php
-    /**
-     * Store desvice token to specific user
-     */
-   (new LaraFcmToken)
-    ->setTokens('token')
-    ->setModel(User::find(1))
-    ->store();
-```
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Prgayman\LaraFcm\Traits\HasLaraFcm; // Add this line
 
-```php
-    /**
-     * Can you set platform or locale to token both options is optional
-     */
-    (new LaraFcmToken)
-    ->setTokens(['token'])
-    ->setPlatform('android')
-    ->setLocale('en')
-    ->store();
-```
+class User extends Authenticatable
+{
+    use HasLaraFcm; // Add this line
+}
 
-```php
-    /**
-     * Get token from database you can use filter by model or locale ot platform to get tokens
-     *
-     * @param Illuminate\Database\Eloquent\Model|null $model
-     * @param string|null $locale
-     * @param string|null $platform
-     *
-     * @return array
-     */
-   $tokens = LaraFcmToken::getDbTokens();
-```
+$user = User::find(1);
 
-```php
-    $tokens = [];
-    /**
-     * Remove toknes from database
-     * @param array $tokens
-     *
-     * @return bool
-    */
-    $isDeleted = LaraFcmToken::removeDbTokens($tokens);
+/**
+ * Get user tokens can you use filter by locale or platform
+ *
+ * @param string|null $locale
+ * @param string|null $platform
+ *
+ * @return array
+ */
+$locale = null;
+$platform = "ios";
+$userTokens = $user->larafcmGetTokens($locale,$platform)
+
+/**
+ * store user tokens can you set platform or locale to token
+ *
+ * @param array|string $tokens
+ * @param string|null  $locale
+ * @param string|null  $platform
+ *
+ * @return bool
+ */
+$storeUserTokens = ['new_token'];
+$user->larafcmStoreTokens($tokens, $locale, $platform)
 ```
 
 ### Downstream Messages
