@@ -147,11 +147,11 @@ class Topics
     /**
      * Transform to array.
      *
-     * @return array
+     * @return array|string
      *
      * @throws NoTopicProvided
      */
-    public function build() :array
+    public function build()
     {
         $this->checkIfOneTopicExist();
 

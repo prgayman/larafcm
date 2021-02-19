@@ -159,4 +159,14 @@ class LaraFcmToken
         ->pluck('token')
         ->toArray();
     }
+
+    /**
+     * Remove tokens from db
+     * @param array|string $tokens
+     * @return bool
+     */
+    public static function removeDbTokens($tokens):bool
+    {
+        return   ModelsLarafcmToken::whereIn('token', is_array($tokens)?$tokens:[$tokens])->delete();
+    }
 }

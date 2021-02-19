@@ -7,6 +7,8 @@ use Prgayman\LaraFcm\Services\LaraFcm;
 
 use Illuminate\Notifications\ChannelManager;
 use Prgayman\LaraFcm\Channels\LaraFcmChannel;
+use Prgayman\LaraFcm\Clients\ClientManager;
+use Prgayman\LaraFcm\Clients\FcmClient;
 
 class LaraFcmServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,8 @@ class LaraFcmServiceProvider extends ServiceProvider
         ]);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     public function register()
@@ -33,5 +37,13 @@ class LaraFcmServiceProvider extends ServiceProvider
         );
 
         $this->app->bind('larafcm', LaraFcm::class);
+
+        $this->app->singleton('larafcm.http.client', function ($app) {
+            return (new ClientManager($app))->driver();
+        });
+
+        $this->app->bind('larafcm.client', function ($app) {
+            return new FcmClient($app['larafcm.http.client'], $app['config']->get('larafcm.http.server_send_url'));
+        });
     }
 }

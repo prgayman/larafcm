@@ -9,91 +9,91 @@ class Notification
      *
      * @var null|string
      */
-    protected ?string $title;
+    protected ?string $title = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $body;
+    protected ?string $body = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $icon;
+    protected ?string $icon = null;
+
+    /**
+     * @internal
+     *
+     * @var string
+     */
+    protected string $sound = "default";
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $sound;
+    protected ?string $channelId = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $channelId;
+    protected ?string $badge = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $badge;
+    protected ?string $tag = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $tag;
+    protected ?string $color = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $color;
+    protected ?string $clickAction = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $clickAction;
+    protected ?string $bodyLocationKey = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $bodyLocationKey;
+    protected ?string $bodyLocationArgs = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $bodyLocationArgs;
+    protected ?string $titleLocationKey = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $titleLocationKey;
-
-    /**
-     * @internal
-     *
-     * @var null|string
-     */
-    protected ?string $titleLocationArgs;
+    protected ?string $titleLocationArgs = null;
 
     /**
      * Indicates notification title. This field is not visible on iOS phones and tablets.
@@ -331,9 +331,9 @@ class Notification
     /**
      * Get Sound.
      *
-     * @return null|string
+     * @return string
      */
-    public function getSound() :?string
+    public function getSound() :string
     {
         return $this->sound;
     }

@@ -15,7 +15,7 @@ class Data
      *
      * @var array
      */
-    protected array $data;
+    protected array $data = [];
 
     /**
      * add data to existing data.

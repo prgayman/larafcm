@@ -2,41 +2,51 @@
 
 namespace Prgayman\LaraFcm\Services;
 
-use Prgayman\LaraFcm\Exceptions\LaraFcmException;
+use Exception;
 use Prgayman\LaraFcm\Message\Notification;
 use Prgayman\LaraFcm\Message\Data;
 use Prgayman\LaraFcm\Message\Options;
 use Prgayman\LaraFcm\Message\Topics;
 
+use \Prgayman\LaraFcm\Response\DownstreamResponse;
+use \Prgayman\LaraFcm\Response\TopicResponse;
+
 class LaraFcm
 {
+    /**
+     * @internal
+     *
+     * @var string|array|null
+     */
+    protected $to = null;
+    
     /**
      * Instance of Notification
      *
      * @var Prgayman\LaraFcm\Message\Notification
      */
-    private Notification $notification;
+    private ?Notification $notification = null;
     
     /**
      * Instance of Data
      *
      * @var Prgayman\LaraFcm\Message\Data
      */
-    private Data $data;
+    private ?Data $data = null;
 
     /**
      * Instance of options
      *
      * @var Prgayman\LaraFcm\Message\Options
      */
-    private Options $options;
+    private ?Options $options = null;
     
     /**
      * Instance of topics
      *
      * @var Prgayman\LaraFcm\Message\Topics
      */
-    private Topics $topics;
+    private ?Topics $topics = null;
     
     /**
      * Set notification payload
@@ -87,28 +97,40 @@ class LaraFcm
         return $this;
     }
 
-    public function sendNotify()
+    /**
+     * Set devices token
+     * @param array|string $to
+     *
+     * @return $this
+     */
+    public function to($to):self
     {
-        if (!isset($this->notification)) {
-            throw LaraFcmException::inValidNotification();
+        $this->to = $to;
+        return $this;
+    }
+
+    /**
+     * Send notification
+     *
+     * @throws Exception
+     * @return DownstreamResponse|TopicResponse|null
+     */
+    public function send()
+    {
+        $response = null;
+        if ($this->topics) {
+            $response = $this->client()->sendToTopic($this->topics, $this->options, $this->notification, $this->data);
+        } elseif ($this->to) {
+            $response = $this->client()->sendTo($this->to, $this->options, $this->notification, $this->data);
+        } else {
+            throw new Exception('Please set topics or devices');
         }
-        $this->send();
+
+        return $response;
     }
 
-    public function sendMessage()
+    private function client()
     {
-        if (!isset($this->date)) {
-            throw LaraFcmException::inValidData();
-        }
-        $this->send();
-    }
-
-    public function sendNotifyWithMessage()
-    {
-        $this->send();
-    }
-
-    private function send()
-    {
+        return app('larafcm.client');
     }
 }

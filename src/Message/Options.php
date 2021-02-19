@@ -18,14 +18,14 @@ class Options
      *
      * @var string
      */
-    protected string $collapseKey;
+    protected string $collapseKey = '';
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $priority;
+    protected string $priority = OptionsPriorities::normal;
 
     /**
      * @internal
@@ -38,7 +38,7 @@ class Options
      * @internal
      * @var bool
      */
-    protected bool $mutableContent;
+    protected bool $mutableContent = false;
 
     /**
      * @internal
@@ -52,14 +52,14 @@ class Options
      *
      * @var string
      */
-    protected string $timeToLive;
+    protected ?string $timeToLive = null;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $restrictedPackageName;
+    protected ?string $restrictedPackageName = null;
 
     /**
      * @internal
