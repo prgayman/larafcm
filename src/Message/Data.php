@@ -1,6 +1,13 @@
 <?php
 namespace Prgayman\LaraFcm\Message;
 
+/**
+ * Class Data.
+ *
+ * Official google documentation :
+ *
+ * @link http://firebase.google.com/docs/cloud-messaging/http-server-ref#downstream-http-messages-json
+ */
 class Data
 {
     /**
@@ -15,7 +22,7 @@ class Data
      *
      * @param array $data
      *
-     * @return self
+     * @return $this
      */
     public function addData(array $data):self
     {
@@ -31,7 +38,7 @@ class Data
      *
      * @param array $data
      *
-     * @return self
+     * @return $this
      */
     public function setData(array $data):self
     {

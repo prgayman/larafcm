@@ -101,9 +101,9 @@ class Notification
      *
      * @param string $title
      *
-     * @return self
+     * @return $this
      */
-    public function setTitle(?string $title) :self
+    public function setTitle(string $title) :self
     {
         $this->title = $title;
 
@@ -115,9 +115,9 @@ class Notification
      *
      * @param string $body
      *
-     * @return self
+     * @return $this
      */
-    public function setBody(?string $body) :self
+    public function setBody(string $body) :self
     {
         $this->body = $body;
 
@@ -129,9 +129,9 @@ class Notification
      *
      * @param string $channelId
      *
-     * @return self
+     * @return $this
      */
-    public function setChannelId(?string $channelId) :self
+    public function setChannelId(string $channelId) :self
     {
         $this->channelId = $channelId;
 
@@ -144,9 +144,9 @@ class Notification
      *
      * @param string $icon
      *
-     * @return self
+     * @return $this
      */
-    public function setIcon(?string $icon) :self
+    public function setIcon(string $icon) :self
     {
         $this->icon = $icon;
 
@@ -159,9 +159,9 @@ class Notification
      *
      * @param string $sound
      *
-     * @return self
+     * @return $this
      */
-    public function setSound(?string $sound) :self
+    public function setSound(string $sound) :self
     {
         $this->sound = $sound;
 
@@ -175,9 +175,9 @@ class Notification
      *
      * @param string $badge
      *
-     * @return self
+     * @return $this
      */
-    public function setBadge(?string $badge) :self
+    public function setBadge(string $badge) :self
     {
         $this->badge = $badge;
 
@@ -193,9 +193,9 @@ class Notification
      *
      * @param string $tag
      *
-     * @return self
+     * @return $this
      */
-    public function setTag(?string $tag) :self
+    public function setTag(string $tag) :self
     {
         $this->tag = $tag;
 
@@ -209,9 +209,9 @@ class Notification
      *
      * @param string $color
      *
-     * @return self
+     * @return $this
      */
-    public function setColor(?string $color) :self
+    public function setColor(string $color) :self
     {
         $this->color = $color;
 
@@ -223,9 +223,9 @@ class Notification
      *
      * @param string $action
      *
-     * @return self
+     * @return $this
      */
-    public function setClickAction(?string $action) :self
+    public function setClickAction(string $action) :self
     {
         $this->clickAction = $action;
 
@@ -237,9 +237,9 @@ class Notification
      *
      * @param string $titleKey
      *
-     * @return self
+     * @return $this
      */
-    public function setTitleLocationKey(?string $titleKey) :self
+    public function setTitleLocationKey(string $titleKey) :self
     {
         $this->titleLocationKey = $titleKey;
 
@@ -251,9 +251,9 @@ class Notification
      *
      * @param mixed $titleArgs
      *
-     * @return self
+     * @return $this
      */
-    public function setTitleLocationArgs(?string $titleArgs) :self
+    public function setTitleLocationArgs(string $titleArgs) :self
     {
         $this->titleLocationArgs = $titleArgs;
 
@@ -265,9 +265,9 @@ class Notification
      *
      * @param string $bodyKey
      *
-     * @return self
+     * @return $this
      */
-    public function setBodyLocationKey(?string $bodyKey) :self
+    public function setBodyLocationKey(string $bodyKey) :self
     {
         $this->bodyLocationKey = $bodyKey;
 
@@ -279,9 +279,9 @@ class Notification
      *
      * @param mixed $bodyArgs
      *
-     * @return self
+     * @return $this
      */
-    public function setBodyLocationArgs(?string $bodyArgs) :self
+    public function setBodyLocationArgs(string $bodyArgs) :self
     {
         $this->bodyLocationArgs = $bodyArgs;
 
