@@ -2,6 +2,7 @@
 
 namespace Prgayman\LaraFcm\Services;
 
+use Prgayman\LaraFcm\Exceptions\LaraFcmException;
 use Prgayman\LaraFcm\Message\Notification;
 use Prgayman\LaraFcm\Message\Data;
 use Prgayman\LaraFcm\Message\Options;
@@ -88,11 +89,17 @@ class LaraFcm
 
     public function sendNotify()
     {
+        if (!isset($this->notification)) {
+            throw LaraFcmException::inValidNotification();
+        }
         $this->send();
     }
 
     public function sendMessage()
     {
+        if (!isset($this->date)) {
+            throw LaraFcmException::inValidData();
+        }
         $this->send();
     }
 
