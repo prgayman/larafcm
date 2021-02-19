@@ -9,6 +9,7 @@ use Illuminate\Notifications\ChannelManager;
 use Prgayman\LaraFcm\Channels\LaraFcmChannel;
 use Prgayman\LaraFcm\Clients\ClientManager;
 use Prgayman\LaraFcm\Clients\FcmClient;
+use Illuminate\Support\Str;
 
 class LaraFcmServiceProvider extends ServiceProvider
 {
@@ -27,14 +28,18 @@ class LaraFcmServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
+        if (!Str::contains($this->app->version(), 'Lumen')) {
+            $this->mergeConfigFrom(
+                __DIR__. '/../../config/larafcm.php',
+                'larafcm'
+            );
+        }
+
         $this->app->make(ChannelManager::class)->extend('larafcm', function () use ($app) {
             return $app->make(LaraFcmChannel::class);
         });
 
-        $this->mergeConfigFrom(
-            __DIR__. '/../../config/larafcm.php',
-            'larafcm'
-        );
+
 
         $this->app->bind('larafcm', LaraFcm::class);
 
