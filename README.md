@@ -379,6 +379,32 @@ $topics->topic('TopicA')
        });
 ```
 
+## Helper fucntions
+
+```php
+    $topicResponse = larafcm()
+    ->notification(
+        (new Notification)
+            ->setTitle('New Order')
+            ->setBody('You have placed order')
+            ->setColor('#f00')
+    )
+    ->options(
+        (new Options)
+        ->setTimeToLive(60*20)
+        ->setContentAvailable(true)
+    )
+    ->data(
+        (new Data)
+        ->addData(['key'=>"value"])
+    )
+    ->topics(
+        (new Topics)
+        ->topic('larafcm')
+    )
+    ->send();
+```
+
 ## Licence
 
 This library is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
