@@ -22,7 +22,7 @@ Or you can add it directly in your composer.json file:
 
 Publish the package config and migrations files using the following command:
 
-    $ php artisan vendor:publish --provider="Prgayman\LaraFcm\Providers\LaraFcmServiceProviderr"
+    $ php artisan vendor:publish --provider="Prgayman\LaraFcm\Providers\LaraFcmServiceProvider"
 
 migrate larafcm_tokens using the following command:
 
