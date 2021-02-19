@@ -407,6 +407,51 @@ $topicResponse = larafcm()
 ->send();
 ```
 
+## Laravel Notification channel
+
+```php
+
+use Illuminate\Notifications\Notification;
+use  Prgayman\LaraFcm\Services\LaraFcm;
+
+use Prgayman\LaraFcm\Message\Data;
+use Prgayman\LaraFcm\Message\Notification as LaraFcmNotification;
+use Prgayman\LaraFcm\Message\Options;
+
+class SendPlacedOrder extends Notification
+{
+    public function via($notifiable)
+    {
+        return ['larafcm'];
+    }
+
+    public function toLaraFcm($notifiable)
+    {
+        $tokens = ['TOKEN_1','TOKEN_2'];
+
+        return (new LaraFcm)
+        ->notification(
+            (new LaraFcmNotification)
+                ->setTitle('New Order')
+                ->setBody('You have placed order')
+                ->setColor('#f00')
+        )
+        ->options(
+            (new Options)
+            ->setTimeToLive(60*20)
+            ->setContentAvailable(true)
+        )
+        ->data(
+            (new Data)
+            ->addData(['key'=>"value"])
+        )
+        ->to($tokens)
+        ->send();
+    }
+}
+
+```
+
 ## Licence
 
 This library is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
