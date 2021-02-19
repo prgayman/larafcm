@@ -117,13 +117,10 @@ class LaraFcm
      */
     public function send()
     {
-        $response = null;
         if ($this->topics) {
             $response = $this->client()->sendToTopic($this->topics, $this->options, $this->notification, $this->data);
-        } elseif ($this->to) {
-            $response = $this->client()->sendTo($this->to, $this->options, $this->notification, $this->data);
         } else {
-            throw new Exception('Please set topics or devices');
+            $response = $this->client()->sendTo($this->to, $this->options, $this->notification, $this->data);
         }
 
         return $response;
