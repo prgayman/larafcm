@@ -180,7 +180,203 @@ The following use statements are required for the examples below:
 use Prgayman\LaraFcm\Message\Options;
 use Prgayman\LaraFcm\Message\Data;
 use Prgayman\LaraFcm\Message\Notification;
+use Prgayman\LaraFcm\Message\Topics;
 use LaraFcm;
+```
+
+#### Sending a Downstream Message to a Device
+
+```php
+
+// Get all tokens form database return array you can set string token
+$tokens = LaraFcmToken::getDbTokens();
+
+// Send Notifications without data
+$downstreamResponse = LaraFcm::to($tokens)
+notification(
+    (new Notification)
+        ->setTitle('New Order')
+        ->setBody('You have placed order')
+        ->setColor('#f00')
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->send();
+
+// Send Notifications with data
+$downstreamResponse = LaraFcm::to($tokens)
+notification(
+    (new Notification)
+        ->setTitle('New Order')
+        ->setBody('You have placed order')
+        ->setColor('#f00')
+)
+->data(
+    (new Data)
+    ->addData(['key'=>"value"])
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->send();
+
+// Send data message
+$downstreamResponse = LaraFcm::to($tokens)
+->data(
+    (new Data)
+    ->addData(['key'=>"value"])
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->send();
+
+$downstreamResponse->numberSuccess();
+$downstreamResponse->numberFailure();
+$downstreamResponse->numberModification();
+
+// return Array - you must remove all this tokens in your database
+$downstreamResponse->tokensToDelete();
+
+// return Array (key : oldToken, value : new token - you must change the token in your database)
+$downstreamResponse->tokensToModify();
+
+// return Array - you should try to resend the message to the tokens in the array
+$downstreamResponse->tokensToRetry();
+
+// return Array (key:token, value:error) - in production you should remove from your database the tokens
+$downstreamResponse->tokensWithError();
+```
+
+> Kindly refer [Downstream message error response codes](https://firebase.google.com/docs/cloud-messaging/http-server-ref#error-codes) documentation for more information.
+
+#### Sending a Message to a Topic
+
+```php
+$topicResponse = LaraFcm::notification(
+    (new Notification)
+        ->setTitle('New Order')
+        ->setBody('You have placed order')
+        ->setColor('#f00')
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->topics(
+    (new Topics)
+    ->topic('larafcm')
+)
+->send();
+
+$topicResponse->isSuccess();
+$topicResponse->shouldRetry();
+$topicResponse->error();
+```
+
+#### Sending a Message to Multiple Topics
+
+It sends notification to devices registered at the following topics:
+
+- larafcm and ecommerce
+- larafcm and news
+
+> Note : Conditions for topics support two operators per expression
+
+```php
+$topicResponse = LaraFcm::notification(
+    (new Notification)
+        ->setTitle('New Order')
+        ->setBody('You have placed order')
+        ->setColor('#f00')
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->topics(
+    (new Topics)
+    ->topic('larafcm')
+    ->andTopic(function($condition) {
+	    $condition->topic('ecommerce')->orTopic('news');
+    });
+)
+->send();
+
+$topicResponse->isSuccess();
+$topicResponse->shouldRetry();
+$topicResponse->error());
+
+```
+
+## Options
+
+LaraFcm supports options based on the options of Firebase Cloud Messaging. These options can help you to define the specificity of your notification.
+
+You can construct an option as follows:
+
+```php
+use Prgayman\LaraFcm\Message\Options;
+
+$options = new Options;
+$options->setTimeToLive(42*60)
+        ->setCollapseKey('a_collapse_key');
+```
+
+## Notification Messages
+
+Notification payload is used to send a notification, the behaviour is defined by the App State and the OS of the receptor device.
+
+**Notification messages are delivered to the notification tray when the app is in the background.** For apps in the foreground, messages are handled by these callbacks:
+
+- didReceiveRemoteNotification: on iOS
+- onMessageReceived() on Android. The notification key in the data bundle contains the notification.
+
+See the [official documentation](https://firebase.google.com/docs/cloud-messaging/concept-options#notifications).
+
+```php
+use Prgayman\LaraFcm\Message\Notification;
+$notification = new Notification();
+$notification->setTitle('title')
+             ->setBody('body')
+             ->setSound('sound')
+             ->setBadge('badge');
+```
+
+## Notification & Data Messages
+
+App behavior when receiving messages that include both notification and data payloads depends on whether the app is in the background or the foreground—essentially, whether or not it is active at the time of receipt ([source](https://firebase.google.com/docs/cloud-messaging/concept-options#messages-with-both-notification-and-data-payloads)).
+
+- **Background**, apps receive notification payload in the notification tray, and only handle the data payload when the user taps on the notification.
+- **Foreground**, your app receives a message object with both payloads available.
+
+## Topics
+
+For topics message, LaraFcm offers an easy to use api which abstract firebase conditions. To make the condition given for example in the firebase official documentation it must be done with LaraFcm like below:
+
+**Official documentation condition**
+
+```
+'TopicA' in topics && ('TopicB' in topics || 'TopicC' in topics)
+```
+
+```php
+use Prgayman\LaraFcm\Message\Topics;
+
+$topics = new Topics;
+$topics->topic('TopicA')
+       ->andTopic(function($condition) {
+	       $condition->topic('TopicB')->orTopic('TopicC');
+       });
 ```
 
 ## Licence
