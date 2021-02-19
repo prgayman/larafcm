@@ -381,28 +381,30 @@ $topics->topic('TopicA')
 
 ## Helper fucntions
 
+### larafcm()
+
 ```php
-    $topicResponse = larafcm()
-    ->notification(
-        (new Notification)
-            ->setTitle('New Order')
-            ->setBody('You have placed order')
-            ->setColor('#f00')
-    )
-    ->options(
-        (new Options)
-        ->setTimeToLive(60*20)
-        ->setContentAvailable(true)
-    )
-    ->data(
-        (new Data)
-        ->addData(['key'=>"value"])
-    )
-    ->topics(
-        (new Topics)
-        ->topic('larafcm')
-    )
-    ->send();
+$topicResponse = larafcm()
+->notification(
+    (new Notification)
+        ->setTitle('New Order')
+        ->setBody('You have placed order')
+        ->setColor('#f00')
+)
+->options(
+    (new Options)
+    ->setTimeToLive(60*20)
+    ->setContentAvailable(true)
+)
+->data(
+    (new Data)
+    ->addData(['key'=>"value"])
+)
+->topics(
+    (new Topics)
+    ->topic('larafcm')
+)
+->send();
 ```
 
 ## Licence
