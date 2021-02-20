@@ -57,13 +57,13 @@ class LaraFcmToken
 
     /**
      * Set model
-     * @param  $model
+     * @param Illuminate\Database\Eloquent\Model|null $model
      *
      * @return self
      */
     public function setModel($model) : self
     {
-        if (!is_object($model)) {
+        if ($model && !is_object($model)) {
             throw TokenException::modelInValid();
         }
 
