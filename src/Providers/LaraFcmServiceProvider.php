@@ -17,7 +17,11 @@ class LaraFcmServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../../config/larafcm.php' => config_path('larafcm.php'),
-        ]);
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../Database/migrations/2021_02_18_160600_create_larafcm_tokens_table.php' => database_path('2021_02_18_160600_create_larafcm_tokens_table.php'),
+        ], 'migrations');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
