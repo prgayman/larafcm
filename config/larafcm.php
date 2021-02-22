@@ -6,7 +6,7 @@ return [
 
     "sender_id" => env('LARAFCM_SENDER_ID'),
 
-    "log_enabled" => true,
+    "log_enabled" => env('LARAFCM_SENDER_LOG_ENABLED', false),
 
     /**
      * Driver protocol
