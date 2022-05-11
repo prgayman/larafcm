@@ -16,7 +16,7 @@ class LaraFcmServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/larafcm.php' => config_path('larafcm.php'),
+            __DIR__ . '/../../config/larafcm.php' => config_path('larafcm.php'),
         ], 'config');
 
 
@@ -31,7 +31,7 @@ class LaraFcmServiceProvider extends ServiceProvider
 
         if (!Str::contains($this->app->version(), 'Lumen')) {
             $this->mergeConfigFrom(
-                __DIR__. '/../../config/larafcm.php',
+                __DIR__ . '/../../config/larafcm.php',
                 'larafcm'
             );
         }
