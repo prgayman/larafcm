@@ -24,28 +24,28 @@ class Request extends BaseRequest
      *
      * @var Options
      */
-    protected ?Options $options = null;
+    protected $options = null;
 
     /**
      * @internal
      *
      * @var Notification
      */
-    protected ?Notification $notification = null;
+    protected $notification = null;
 
     /**
      * @internal
      *
      * @var Data
      */
-    protected ?Data $data = null;
+    protected $data = null;
 
     /**
      * @internal
      *
      * @var Topics|null
      */
-    protected ?Topics $topic = null;
+    protected $topic = null;
 
     /**
      * Request constructor.

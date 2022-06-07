@@ -11,7 +11,7 @@ class OptionsBuild implements Arrayable
      *
      * @var Options
      */
-    protected Options $options;
+    protected $options;
 
     /**
      * Options constructor.

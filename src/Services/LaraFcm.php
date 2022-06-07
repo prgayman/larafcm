@@ -25,28 +25,28 @@ class LaraFcm
      *
      * @var Prgayman\LaraFcm\Message\Notification
      */
-    private ?Notification $notification = null;
+    private  $notification = null;
     
     /**
      * Instance of Data
      *
      * @var Prgayman\LaraFcm\Message\Data
      */
-    private ?Data $data = null;
+    private  $data = null;
 
     /**
      * Instance of options
      *
      * @var Prgayman\LaraFcm\Message\Options
      */
-    private ?Options $options = null;
+    private  $options = null;
     
     /**
      * Instance of topics
      *
      * @var Prgayman\LaraFcm\Message\Topics
      */
-    private ?Topics $topics = null;
+    private $topics = null;
     
     /**
      * Set notification payload

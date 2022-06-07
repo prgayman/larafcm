@@ -20,28 +20,28 @@ class TopicResponse extends BaseResponse implements TopicResponseContract
      *
      * @var string
      */
-    protected Topics $topic;
+    protected $topic;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $messageId;
+    protected $messageId;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $error;
+    protected $error;
 
     /**
      * @internal
      *
      * @var bool
      */
-    protected bool $needRetry = false;
+    protected $needRetry = false;
 
     /**
      * TopicResponse constructor.

@@ -13,14 +13,14 @@ abstract class BaseRequest
      *
      * @var \GuzzleHttp\ClientInterface
      */
-    protected ClientInterface $client;
+    protected $client;
 
     /**
      * @internal
      *
      * @var array
      */
-    protected array $config;
+    protected $config;
 
     /**
      * BaseRequest constructor.

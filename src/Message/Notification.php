@@ -9,91 +9,91 @@ class Notification
      *
      * @var null|string
      */
-    protected ?string $title = null;
+    protected $title = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $body = null;
+    protected $body = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $icon = null;
+    protected $icon = null;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $sound = "default";
+    protected  $sound = "default";
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $channelId = null;
+    protected  $channelId = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $badge = null;
+    protected  $badge = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $tag = null;
+    protected  $tag = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $color = null;
+    protected $color = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $clickAction = null;
+    protected  $clickAction = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $bodyLocationKey = null;
+    protected $bodyLocationKey = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $bodyLocationArgs = null;
+    protected $bodyLocationArgs = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $titleLocationKey = null;
+    protected  $titleLocationKey = null;
 
     /**
      * @internal
      *
      * @var null|string
      */
-    protected ?string $titleLocationArgs = null;
+    protected  $titleLocationArgs = null;
 
     /**
      * Indicates notification title. This field is not visible on iOS phones and tablets.

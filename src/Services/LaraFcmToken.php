@@ -12,13 +12,13 @@ class LaraFcmToken
      * Firebase token
      * @var array
      */
-    private array $tokens;
+    private $tokens;
 
     /**
      * Platform tokne
      * @var string
      */
-    private ?string $platform = null;
+    private $platform = null;
 
     /**
      * Model have tokne
@@ -29,7 +29,7 @@ class LaraFcmToken
     /**
      * Token localization
      */
-    private ?string $locale = null;
+    private $locale = null;
 
     /**
      * Set tokens

@@ -17,7 +17,7 @@ class Topics
      *
      * @var array of element in the condition
      */
-    public array $conditions = [];
+    public $conditions = [];
 
     /**
      * Add a topic, this method should be called before any conditional topic.

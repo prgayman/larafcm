@@ -5,7 +5,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class NotificationBuild implements Arrayable
 {
-    private Notification $notification;
+    private $notification;
 
     public function __construct(Notification $notification)
     {

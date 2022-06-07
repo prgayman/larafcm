@@ -18,55 +18,55 @@ class Options
      *
      * @var string
      */
-    protected string $collapseKey = '';
+    protected $collapseKey = '';
 
     /**
      * @internal
      *
      * @var string
      */
-    protected string $priority = OptionsPriorities::normal;
+    protected $priority = OptionsPriorities::normal;
 
     /**
      * @internal
      *
      * @var bool
      */
-    protected bool $contentAvailable = false;
+    protected $contentAvailable = false;
 
     /**
      * @internal
      * @var bool
      */
-    protected bool $mutableContent = false;
+    protected $mutableContent = false;
 
     /**
      * @internal
      *
      * @var bool
      */
-    protected bool $delayWhileIdle = false;
+    protected $delayWhileIdle = false;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected ?string $timeToLive = null;
+    protected $timeToLive = null;
 
     /**
      * @internal
      *
      * @var string
      */
-    protected ?string $restrictedPackageName = null;
+    protected $restrictedPackageName = null;
 
     /**
      * @internal
      *
      * @var bool
      */
-    protected bool $dryRun = false;
+    protected $dryRun = false;
 
     /**
      * This parameter identifies a group of messages

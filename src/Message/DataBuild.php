@@ -5,7 +5,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class DataBuild implements Arrayable
 {
-    private Data $data;
+    private $data;
 
     public function __construct(Data $data)
     {
